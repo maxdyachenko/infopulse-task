@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Awesome Shopping Cart</title>
+	<link rel="stylesheet" type="text/css" href="styles/style.css">
+	<link rel="stylesheet" type="text/css" href="styles/responsive.css">
+</head>
+<body>
+<div id="first-page">
+	<header>
+		<h1>Awesome shopping cart</h1>
+		<div class="card-wrapper">
+			<span>Card Items <span data-bind="text: cardItems"></span></span>
+			<div class="card-logo"><img src="img/card-logo.png" alt="card-logo"/></div>
+		</div>
+	</header>
+	<div class="main-wrapper">
+		<div class="filter-wrapper">
+			<div class="field">
+				<input type="text" name="search"/> <div class="search-icon"><img src="img/search-icon.png" alt="search"/></div>
+			</div>
+
+			<div class="sort-field">
+				<span>sort by:</span>
+				<div class="select-wrapper">
+					<select data-bind="options: availableSort,optionsCaption:'choose',value:selectedSort,event:{change: sortBy}">
+						
+					</select>
+				</div>
+			</div>
+		</div>
+
+		<section class="content">
+			<ul data-bind="foreach:articles">
+				<li>
+					<article>
+						<span class="widget-count" data-bind="text: name"></span>
+						<img data-bind="attr:{src:url}" alt="car"/>
+						<div class="quantity-wrapper">
+							<span>quantity <span data-bind="text:numberOfQuantity"></span></span>
+							<button class="plus" data-bind="click: incrementClickCounter">+</button>
+							<button class="minus" data-bind="click: decrementClickCounter">-</button>
+						</div>
+
+						<span class="price" data-bind="text: price"></span><span class="currency" data-bind="text: currency"></span>
+						<button class="buy-butt" data-bind="click: buyProduct">buy</button>
+					</article>
+				</li>
+			</ul>
+		</section>
+	</div>
+</div>
+
+	<section class="shopping-cart">
+			<button id="close">Close</button>
+
+			<div data-bind="if: cardItems() == 0">
+				<span class="empty-cart">Your cart is empty...</span>
+			</div>
+				<div data-bind="if: cardItems() > 0">
+					<section class="header">
+						<div class="product-hr">product</div>
+						<div class="quantity-hr">quantity</div>
+						<div class="price-hr">price</div>
+					</section>
+					
+					
+					<ol class="items-list" data-bind="foreach: arrAttachedItems">
+						<li>
+							<span class="product" data-bind="text:name"></span>
+							<span class="quantity" data-bind="text: numberOfQuantity"></span>
+							<div class="price-result"><span data-bind="text: obPrice()"></span><span  data-bind="text: currency"></span></div>
+							<span class="remove" data-bind="click:$root.removeSelected">Remove</span>
+						</li>
+					</ol>
+					
+				
+			
+					<button class="buy-butt-result" data-bind="click: clearForm" onclick="final()">Buy</button>
+					<div class="summary"><span class="price-result" data-bind="text: totalPrice()"></span><span class="currency-result" data-bind="text: currency"></span></div>
+				</div>
+		</section>
+
+		<section class="shopping-cart-result">
+			<button class="close">Close</button>
+			<div class="text">
+				<h3>thank you for purchase!</h3>
+				<button id="big-close">close</button>
+			</div>
+		</section>
+
+
+	<script src="js/libs/knockout-3.4.js"></script>
+	<script src="js/view.js"></script>
+	<script src="js/viewmodel.js"></script>
+</body>
+</html>
